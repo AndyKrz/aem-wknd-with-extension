@@ -1,0 +1,51 @@
+Manifest-Version: 1.0
+Bundle-Category: WKND Sites Project
+Bundle-Description: Core bundle for WKND Sites Project
+Bundle-ManifestVersion: 2
+Bundle-Name: WKND Sites Project - Core
+Bundle-SymbolicName: aem-guides-wknd.core
+Bundle-Version: 0.0.1.SNAPSHOT
+Export-Package: com.adobe.aem.guides.wknd.core.filters;version="1.0";u
+ ses:="javax.servlet",com.adobe.aem.guides.wknd.core.listeners;version
+ ="1.0";uses:="org.apache.sling.api.resource.observation",com.adobe.ae
+ m.guides.wknd.core.models;version="1.1.0";uses:="javax.annotation,org
+ .apache.sling.api.resource,org.apache.sling.models.annotations,org.ap
+ ache.sling.models.annotations.injectorspecific",com.adobe.aem.guides.
+ wknd.core.schedulers;version="1.0",com.adobe.aem.guides.wknd.core.ser
+ vlets;version="1.0";uses:="javax.servlet,org.apache.sling.api,org.apa
+ che.sling.api.servlets"
+Import-Package: javax.annotation;version="0.0.0",com.adobe.aem.guides.
+ wknd.core.filters;version="[1.0,2)",com.adobe.aem.guides.wknd.core.li
+ steners;version="[1.0,2)",com.adobe.aem.guides.wknd.core.models;versi
+ on="[1.1,2)",com.adobe.aem.guides.wknd.core.schedulers;version="[1.0,
+ 2)",com.adobe.aem.guides.wknd.core.servlets;version="[1.0,2)",com.ado
+ be.cq.wcm.core.components.models;version="[12.23,13)",com.day.cq.wcm.
+ api;version="[1.29,2)",javax.inject;version="[1.0,2)",javax.servlet;v
+ ersion="[3.1,4)",org.apache.commons.lang3;version="[3.12,4)",org.apac
+ he.sling.api;version="[2.3,3)",org.apache.sling.api.request;version="
+ [2.4,3)",org.apache.sling.api.resource;version="[2.12,3)",org.apache.
+ sling.api.resource.observation;version="[1.2,2)",org.apache.sling.api
+ .servlets;version="[2.3,3)",org.apache.sling.models.annotations;versi
+ on="[1.5,2)",org.apache.sling.models.annotations.injectorspecific;ver
+ sion="[1.1,2)",org.apache.sling.models.factory;version="[1.4,2)",org.
+ slf4j;version="[1.7,2)"
+Private-Package: com.adobe.aem.guides.wknd.core.models.impl
+Provide-Capability: osgi.service;objectClass:List<String>="java.lang.R
+ unnable",osgi.service;objectClass:List<String>="javax.servlet.Filter"
+ ;uses:="javax.servlet",osgi.service;objectClass:List<String>="javax.s
+ ervlet.Servlet";uses:="javax.servlet",osgi.service;objectClass:List<S
+ tring>="org.apache.sling.api.resource.observation.ResourceChangeListe
+ ner";uses:="org.apache.sling.api.resource.observation"
+Require-Capability: osgi.extender;filter:="(&(osgi.extender=osgi.compo
+ nent)(version>=1.4.0)(!(version>=2.0.0)))",osgi.ee;filter:="(&(osgi.e
+ e=JavaSE)(version=1.8))"
+Service-Component: OSGI-INF/com.adobe.aem.guides.wknd.core.filters.Log
+ gingFilter.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.listeners.Simp
+ leResourceListener.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.schedu
+ lers.SimpleScheduledTask.xml,OSGI-INF/com.adobe.aem.guides.wknd.core.
+ servlets.SimpleServlet.xml
+Sling-Model-Classes: com.adobe.aem.guides.wknd.core.models.HelloWorldM
+ odel,com.adobe.aem.guides.wknd.core.models.NavigationModel,com.adobe.
+ aem.guides.wknd.core.models.TrainingTitle,com.adobe.aem.guides.wknd.c
+ ore.models.impl.BylineImpl
+
