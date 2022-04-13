@@ -1,12 +1,15 @@
 com\adobe\aem\guides\wknd\core\filters\LoggingFilter.class
+com\adobe\aem\guides\wknd\core\models\SomeButtonModel.class
 com\adobe\aem\guides\wknd\core\models\NavigationModel.class
 com\adobe\aem\guides\wknd\core\models\TrainingTitle.class
 com\adobe\aem\guides\wknd\core\schedulers\SimpleScheduledTask$Config.class
 com\adobe\aem\guides\wknd\core\listeners\package-info.class
+com\adobe\aem\guides\wknd\core\models\impl\SomeButtonModelImpl.class
 com\adobe\aem\guides\wknd\core\models\HelloWorldModel.class
 com\adobe\aem\guides\wknd\core\servlets\SimpleServlet.class
 com\adobe\aem\guides\wknd\core\listeners\SimpleResourceListener.class
 com\adobe\aem\guides\wknd\core\schedulers\SimpleScheduledTask.class
+com\adobe\aem\guides\wknd\core\servlets\AnotherSimpleServlet.class
 com\adobe\aem\guides\wknd\core\filters\package-info.class
 com\adobe\aem\guides\wknd\core\models\impl\BylineImpl.class
 com\adobe\aem\guides\wknd\core\schedulers\package-info.class

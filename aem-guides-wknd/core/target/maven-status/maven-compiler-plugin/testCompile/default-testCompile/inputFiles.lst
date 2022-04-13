@@ -1,7 +1,7 @@
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\testcontext\AppAemContext.java
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\HelloWorldModelTest.java
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\impl\BylineImplTest.java
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\schedulers\SimpleScheduledTaskTest.java
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\filters\LoggingFilterTest.java
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\listeners\SimpleResourceListenerTest.java
-C:\Users\ATLC\Desktop\project\repos\aem-6.5.10-wknd-working\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\servlets\SimpleServletTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\servlets\SimpleServletTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\HelloWorldModelTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\impl\BylineImplTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\listeners\SimpleResourceListenerTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\schedulers\SimpleScheduledTaskTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\testcontext\AppAemContext.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\filters\LoggingFilterTest.java

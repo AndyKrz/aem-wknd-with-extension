@@ -5,12 +5,4 @@
     dependencies="[wknd.dependencies]"
     cssProcessor="[default:none,min:none]"
     jsProcessor="[default:none,min:none]"
-    allowProxy="{Boolean}true"
-    embed="[  
-            core.wcm.components.image.v1,  
-            core.wcm.components.list.v1,  
-            core.wcm.components.breadcrumb.v1,  
-            core.wcm.components.form.container.v1,  
-            core.wcm.components.form.text.v1,
-            core.wcm.components.form.title.v3  
-            ]"/>
+    allowProxy="{Boolean}true"/>
