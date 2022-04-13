@@ -16,5 +16,6 @@ Content-Package-Dependencies-Locations: adobe/cq60:core.wcm.components.c
 Content-Package-Roots: /apps/wknd/clientlibs,/apps/wknd/components,/apps
  /wknd/i18n
 Import-Package: com.adobe.aem.guides.wknd.core.models;version="[1.1.0,2.
- 0.0)",org.apache.sling.scripting.sightly;version="[2.0.0,3.0.0)"
+ 0.0)",com.adobe.cq.wcm.core.components.models;version="[12.23.0,13.0.0)
+ ",org.apache.sling.scripting.sightly;version="[2.0.0,3.0.0)"
 

@@ -14,10 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@Model(adaptables = SlingHttpServletRequest.class, adapters = {
-        Button.class }, resourceType = SomeButtonModelImpl.RESOURCE_TYPE, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
-public class SomeButtonModelImpl implements SomeButtonModel {
+@Model(adaptables = SlingHttpServletRequest.class,
+        adapters = {SomeButtonModel.class },
+        resourceType = SomeButtonModelImpl.RESOURCE_TYPE,
+        defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 
+public class SomeButtonModelImpl implements SomeButtonModel {
 
     // todo
     protected static final String RESOURCE_TYPE = "wknd/components/somebutton";
@@ -31,10 +33,7 @@ public class SomeButtonModelImpl implements SomeButtonModel {
     private String name;
 
     @ValueMapValue
-    private String text;
-
-    @ValueMapValue
-    private List<String> occupations;
+    private List<String> childNodes;
 
     @Override
     public String getName() {
@@ -42,15 +41,10 @@ public class SomeButtonModelImpl implements SomeButtonModel {
     }
 
     @Override
-    public String getText() {
-        return text;
-    }
-
-    @Override
-    public List<String> getOccupations() {
-        if (occupations != null) {
-            Collections.sort(occupations);
-            return new ArrayList<String>(occupations);
+    public List<String> getChildNodes() {
+        if (childNodes != null) {
+            Collections.sort(childNodes);
+            return new ArrayList<String>(childNodes);
         } else {
             return Collections.emptyList();
         }

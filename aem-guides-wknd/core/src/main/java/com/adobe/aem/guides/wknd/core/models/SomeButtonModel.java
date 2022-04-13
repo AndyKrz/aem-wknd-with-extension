@@ -6,7 +6,5 @@ public interface SomeButtonModel {
 
     String getName();
 
-    String getText();
-
-    List<String> getOccupations();
+    List<String> getChildNodes();
 }
