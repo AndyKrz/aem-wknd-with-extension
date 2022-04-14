@@ -31,9 +31,11 @@
     <div class="component-content">
         <h1 class="cmp-button__text">${model.name}</h1>
         <h3>Child nodes: </h3>
-        <ul>${model.childNodes}</ul>
-        <ul>${model.child}</ul>
-        </ul>
-    </div>
-    >
+        <dl data-sly-list="${model.childButtonNodes}">
+            <dt>Index: ${itemList.index}</dt>
+            <dd>Title: ${item.jcr:title}</dd>
+            <dd>ButtonType: ${item.buttonType}</dd>
+        </dl>
+    </div>>
 </button>
+
