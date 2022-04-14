@@ -41,6 +41,10 @@ public class SomeButtonModelImpl implements SomeButtonModel {
         return name;
     }
 
+    private String filePath;
+
+
+
     @Override
     public List<String> getChildNodes() {
         if (childNodes != null) {
