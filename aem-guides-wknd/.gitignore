@@ -1,0 +1,13 @@
+/aem-guides-wknd/core/target/
+/aem-guides-wknd/it.tests/target
+/aem-guides-wknd/all/target
+/aem-guides-wknd/ui.config/target
+/aem-guides-wknd/ui.apps/target
+/aem-guides-wknd/ui.apps.structure/target
+/aem-guides-wknd/ui.content/target
+/aem-guides-wknd/ui.frontend/target
+/aem-guides-wknd/ui.tests/target
+/aem-guides-wknd/.idea
+/aem-guides-wknd/.vscode
+/aem-guides-wknd/dispatcher/target
+/aem-guides-wknd/node_modules
