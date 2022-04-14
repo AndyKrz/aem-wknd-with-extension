@@ -21,7 +21,6 @@ import java.util.List;
 
 public class SomeButtonModelImpl implements SomeButtonModel {
 
-
     protected static final String RESOURCE_TYPE = "wknd/components/somebutton";
 
     @Inject

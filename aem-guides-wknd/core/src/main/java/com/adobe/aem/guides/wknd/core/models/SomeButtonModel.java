@@ -7,5 +7,4 @@ public interface SomeButtonModel {
     String getName();
 
     List<String> getChildNodes();
-
 }
