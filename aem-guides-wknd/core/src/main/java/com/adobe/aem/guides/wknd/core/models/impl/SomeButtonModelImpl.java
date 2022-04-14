@@ -2,6 +2,8 @@ package com.adobe.aem.guides.wknd.core.models.impl;
 
 import com.adobe.aem.guides.wknd.core.models.SomeButtonModel;
 import com.adobe.cq.wcm.core.components.models.Button;
+import com.google.common.collect.ImmutableList;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
@@ -10,7 +12,6 @@ import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,9 +23,6 @@ import java.util.List;
 public class SomeButtonModelImpl implements SomeButtonModel {
 
     protected static final String RESOURCE_TYPE = "wknd/components/somebutton";
-
-    @Inject
-    private Resource resource;
 
     @Self
     private SlingHttpServletRequest request;
@@ -40,15 +38,11 @@ public class SomeButtonModelImpl implements SomeButtonModel {
         return name;
     }
 
-    private String filePath;
-
-
-
     @Override
     public List<String> getChildNodes() {
-        if (childNodes != null) {
+        if (CollectionUtils.isEmpty(childNodes)) {
             Collections.sort(childNodes);
-            return new ArrayList<String>(childNodes);
+            return ImmutableList.copyOf(childNodes);
         } else {
             return Collections.emptyList();
         }
