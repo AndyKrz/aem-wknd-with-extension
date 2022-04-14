@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
 @Model(adaptables = SlingHttpServletRequest.class,
         adapters = {SomeButtonModel.class },
         resourceType = SomeButtonModelImpl.RESOURCE_TYPE,
