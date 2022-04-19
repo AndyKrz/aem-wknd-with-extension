@@ -6,6 +6,8 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 
 public class SearchModelImpl implements SearchModel {
 
+    protected static final String RESOURCE_TYPE = "/content/wknd";
+
     @ValueMapValue
     String name;
 

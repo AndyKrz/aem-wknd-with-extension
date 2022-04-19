@@ -44,6 +44,21 @@
                                                 fieldDescription="HTML ID attribute to apply to the component."
                                                 fieldLabel="ID"
                                                 name="./id"/>
+<!--                                            <nodeTypes-->
+<!--                                                    jcr:primaryType="cq:Widget"-->
+<!--                                                    fieldLabel="Node Types"-->
+<!--                                                    name="./nodeTypes"-->
+<!--                                                    sling:resourceType="granite/ui/components/coral/foundation/form/multifield"/>-->
+<!--                                            <searchIn-->
+<!--                                                    jcr:primaryType="cq:Widget"-->
+<!--                                                    fieldLabel="Path to search in"-->
+<!--                                                    name="./searchIn"-->
+<!--                                                    xtype="pathfield"/>-->
+                                            <searchButtonText
+                                                    jcr:primaryType="cq:Widget"
+                                                    fieldLabel="Search button text"
+                                                    name="./searchButtonText"
+                                                    sling:resourceType="granite/ui/components/coral/foundation/form/textfield"/>
                                         </items>
                                     </column>
                                 </items>

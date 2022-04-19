@@ -4,7 +4,8 @@ import org.apache.sling.api.resource.Resource;
 
 public interface SearchService {
 
-    String PROP_NAME = "service_name";
+    String httpCall() throws Exception;
 
     String querySearch(Resource resource);
+
 }
