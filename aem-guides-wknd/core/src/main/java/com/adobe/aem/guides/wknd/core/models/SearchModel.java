@@ -1,12 +1,15 @@
 package com.adobe.aem.guides.wknd.core.models;
 
+import com.adobe.cq.wcm.core.components.models.Component;
 import com.adobe.xfa.Int;
+import com.drew.lang.annotations.NotNull;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-public interface SearchModel {
+public interface SearchModel{
 
-    Int getId();
+    String getTitle();
 
-    String getName();
+    int getResultsSize();
 
+    int getSearchTermMinimumLength();
 }

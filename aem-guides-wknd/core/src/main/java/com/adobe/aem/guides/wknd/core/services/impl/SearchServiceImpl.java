@@ -35,20 +35,18 @@ public class SearchServiceImpl implements SearchService {
 //        resourceResolver.close();
     }
 
-
     @Override
     public String httpCall() throws Exception {
             try {
                 boolean enable = searchConfiguration.enableConfig();
                 String path = searchConfiguration.getPath();
+                String endpoint = searchConfiguration.getEndpoint();
             } catch(Exception e) {
                 return "Error occurred" + e.getMessage();
         }
 
         return httpCall();
     }
-
-
 
     @Override
     public String querySearch(Resource resource) {

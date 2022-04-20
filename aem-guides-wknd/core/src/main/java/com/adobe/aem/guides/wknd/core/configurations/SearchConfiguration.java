@@ -19,4 +19,9 @@ public @interface SearchConfiguration {
             description = "Enter the path")
     public String getPath();
 
+    @AttributeDefinition(
+            name = "Endpoint",
+            description = "Enter the endpoint")
+     public String getEndpoint();
+
 }
