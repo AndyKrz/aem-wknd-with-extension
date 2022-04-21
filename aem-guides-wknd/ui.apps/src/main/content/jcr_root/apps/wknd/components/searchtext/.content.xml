@@ -3,5 +3,4 @@
     cq:icon="search"
     jcr:primaryType="cq:Component"
     jcr:title="SearchText"
-    sling:resourceSuperType="core/wcm/components/search/v1/search"
-    componentGroup="WKND Sites Project - Content"/>
+    componentGroup="WKND Sites Project - Structure"/>

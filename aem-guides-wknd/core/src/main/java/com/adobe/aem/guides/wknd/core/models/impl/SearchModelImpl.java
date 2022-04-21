@@ -1,19 +1,17 @@
 package com.adobe.aem.guides.wknd.core.models.impl;
 
 import com.adobe.aem.guides.wknd.core.models.SearchModel;
-import com.drew.lang.annotations.NotNull;
+import com.adobe.aem.guides.wknd.core.services.SearchService;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.Self;
+import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
-import org.apache.sling.models.factory.ModelFactory;
-import org.json.JSONObject;
+import org.osgi.service.component.annotations.Reference;
 
-import javax.json.JsonObject;
-import java.util.HashMap;
+import javax.jcr.RepositoryException;
 import java.util.Map;
 
 @Model(
@@ -26,21 +24,37 @@ public class SearchModelImpl implements SearchModel {
 
     protected static final String RESOURCE_TYPE = "/content/wknd";
 
+    @Reference
+    SearchService searchService;
+
     @Self
     private SlingHttpServletRequest request;
 
-    @OSGiService
-    private ModelFactory modelFactory;
+    @SlingObject
+    private ResourceResolver resourceResolver = getRequest().getResourceResolver();
+
+    public SearchModelImpl() throws RepositoryException {
+    }
+
+    public SlingHttpServletRequest getRequest() {
+        return request;
+    }
+
+    Map<String,String> getQueryItem = searchService.searchResultSQL2(getRootPath(),getTitle(),getLimitOfResults(),resourceResolver);
+
+    @ValueMapValue
+    private long limitOfResults;
 
     @ValueMapValue
     String title;
 
     @ValueMapValue
-    int resultSize;
+    private int resultSize;
 
-    @ValueMapValue
-    int searchTermMinimumLength;
-
+    @Override
+    public String getRootPath() {
+        return searchService.httpResponse();
+    }
 
     @Override
     public String getTitle() {
@@ -49,12 +63,12 @@ public class SearchModelImpl implements SearchModel {
 
     @Override
     public int getResultsSize() {
-        return 0;
+        return resultSize;
     }
 
     @Override
-    public int getSearchTermMinimumLength() {
-        return 0;
+    public long getLimitOfResults() {
+        return limitOfResults;
     }
 
 }

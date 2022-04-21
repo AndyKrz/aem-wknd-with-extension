@@ -20,8 +20,10 @@
         class="cmp-search"
         role="search"
         data-cmp-is="search"
-        data-cmp-min-length="${search.searchTermMinimumLength}"
         data-cmp-results-size="${search.resultsSize}">
+  <div>
+    <h2>Showing results for: ${search.title}</h2>
+  </div>>
   <div class="cmp_search__info" aria-live="polite" role="status"></div>
   <form class="cmp-search__form" data-cmp-hook-search="form"
         method="get" action="${currentPage.path @ addSelectors=['searchresults'], extension='json', suffix = search.relativePath}"
@@ -38,7 +40,8 @@
   </form>
   <div>
     <p>Search Size: ${search.resultsSize}<p>
-    <p>Minimum length: ${search.searchTermMinimumLength}</p>
+    <p>RootPath : ${model.getRootPath}</p>
+    <p>Limit: ${model.limitOfResults}</p>
   </div>
   <div class="cmp-search__results" aria-label="${'Search results' @ i18n}" data-cmp-hook-search="results" role="listbox" aria-multiselectable="false">
     <p>Search Size: ${search.resultsSize}<p>

@@ -7,9 +7,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 public interface SearchModel{
 
+    String getRootPath();
+
     String getTitle();
 
     int getResultsSize();
 
-    int getSearchTermMinimumLength();
+    long getLimitOfResults();
+
+
 }
