@@ -9,11 +9,11 @@ import java.util.Map;
 
 public interface SearchService {
 
-    String httpResponse();
+    boolean enableConfig();
+
+    String getRootPath();
 
     Map<String,String> searchResultSQL2(String rootPath, String titleOfNode, long limitOfResults,ResourceResolver resourceResolver)
             throws RepositoryException;
-
-    String getConfigPath();
 
 }

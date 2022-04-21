@@ -43,10 +43,13 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public String httpResponse(){
-                boolean enable = searchConfiguration.enableConfig();
-                String rootPath = searchConfiguration.getRootPath();
-        return httpResponse();
+    public boolean enableConfig() {
+        return searchConfiguration.enableConfig();
+    }
+
+    @Override
+    public String getRootPath(){
+        return searchConfiguration.getRootPath();
     }
 
     private QueryResult querySearch(String rootPath, String title, long limitOfResults, ResourceResolver resourceResolver) throws RepositoryException {
@@ -64,7 +67,7 @@ public class SearchServiceImpl implements SearchService {
         QueryResult result;
 
         try {
-            result = (QueryResult) searchResultSQL2(rootPath,title,limitOfResults,resourceResolver);
+            result = querySearch(rootPath,title,limitOfResults,resourceResolver);
             NodeIterator pages = result.getNodes();
             while(pages.hasNext()){
                 Node page = pages.nextNode();
@@ -80,9 +83,5 @@ public class SearchServiceImpl implements SearchService {
         return searchedResults;
     }
 
-    @Override
-    public String getConfigPath() {
-        return searchConfiguration.getRootPath();
-    }
 
 }

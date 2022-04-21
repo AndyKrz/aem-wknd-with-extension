@@ -22,7 +22,12 @@
         data-cmp-is="search"
         data-cmp-results-size="${search.resultsSize}">
   <div>
-    <h2>Showing results for: ${search.title}</h2>
+    <h3>Showing results for: ${model.title}</h3>
+    <dl data-sly-repeat="${model.childNodes}">
+      <dd>Title of content: ${item.jcr:title}</dd>
+      <dd>RootPathConfig: ${model.getRootPath}</dd>
+      <dd>Path of node: ${item.getPath}</dd>
+    </dl>
   </div>>
   <div class="cmp_search__info" aria-live="polite" role="status"></div>
   <form class="cmp-search__form" data-cmp-hook-search="form"
@@ -33,13 +38,12 @@
       <span class="cmp-search__loading-indicator" data-cmp-hook-search="loadingIndicator"></span>
       <input class="cmp-search__input" data-cmp-hook-search="input" type="text" name="fulltext" placeholder="${'Search' @ i18n}"
              role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-invalid="false" aria-expanded="false">
-      <button class="cmp-search__clear" data-cmp-hook-search="clear" aria-label="${'Clear' @ i18n}">
-        <i class="cmp-search__clear-icon"></i>
-      </button>
+<!--      <button class="cmp-search__clear" data-cmp-hook-search="clear" aria-label="${'Clear' @ i18n}">-->
+<!--        <i class="cmp-search__clear-icon"></i>-->
+<!--      </button>-->
     </div>
   </form>
   <div>
-    <p>Search Size: ${search.resultsSize}<p>
     <p>RootPath : ${model.getRootPath}</p>
     <p>Limit: ${model.limitOfResults}</p>
   </div>
@@ -47,5 +51,5 @@
     <p>Search Size: ${search.resultsSize}<p>
     <p>Minimum length: ${search.searchTermMinimumLength}</p>
   </div>
-  <sly data-sly-include="itemTemplate.html"/>
+<!--  <sly data-sly-include="itemTemplate.html"/>-->
 </section>

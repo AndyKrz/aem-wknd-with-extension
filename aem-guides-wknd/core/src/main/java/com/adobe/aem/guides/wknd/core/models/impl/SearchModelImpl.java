@@ -3,44 +3,42 @@ package com.adobe.aem.guides.wknd.core.models.impl;
 import com.adobe.aem.guides.wknd.core.models.SearchModel;
 import com.adobe.aem.guides.wknd.core.services.SearchService;
 import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
+import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.osgi.service.component.annotations.Reference;
 
 import javax.jcr.RepositoryException;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.Map;
 
 @Model(
         adaptables = {SlingHttpServletRequest.class},
         adapters = {SearchModel.class},
-        resourceType = {SearchModelImpl.RESOURCE_TYPE},
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
 public class SearchModelImpl implements SearchModel {
 
-    protected static final String RESOURCE_TYPE = "/content/wknd";
-
-    @Reference
+    @OSGiService
     SearchService searchService;
 
     @Self
     private SlingHttpServletRequest request;
 
     @SlingObject
-    private ResourceResolver resourceResolver = getRequest().getResourceResolver();
+    private ResourceResolver resourceResolver;
 
-    public SearchModelImpl() throws RepositoryException {
-    }
+//    public SlingHttpServletRequest getRequest() {
+//        return request;
+//    }
 
-    public SlingHttpServletRequest getRequest() {
-        return request;
-    }
-
-    Map<String,String> getQueryItem = searchService.searchResultSQL2(getRootPath(),getTitle(),getLimitOfResults(),resourceResolver);
+//    Map<String,String> getQueryItem = searchService.searchResultSQL2(getRootPath(),getTitle(),getLimitOfResults(),resourceResolver);
 
     @ValueMapValue
     private long limitOfResults;
@@ -53,7 +51,7 @@ public class SearchModelImpl implements SearchModel {
 
     @Override
     public String getRootPath() {
-        return searchService.httpResponse();
+        return searchService.getRootPath();
     }
 
     @Override
@@ -69,6 +67,17 @@ public class SearchModelImpl implements SearchModel {
     @Override
     public long getLimitOfResults() {
         return limitOfResults;
+    }
+
+    public Iterator<Resource> getChildNodes() {
+        if(getRootPath() == null || getRootPath().isEmpty()) {
+            return Collections.emptyIterator();
+        }
+        final Resource resource = resourceResolver.getResource(getRootPath());
+        if(resource == null) {
+            return Collections.emptyIterator();
+        }
+        return resource.listChildren();
     }
 
 }
