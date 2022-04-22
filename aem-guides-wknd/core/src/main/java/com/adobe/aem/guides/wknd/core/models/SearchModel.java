@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.sling.api.resource.Resource;
 
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public interface SearchModel{
 
@@ -14,9 +16,9 @@ public interface SearchModel{
 
     String getTitle();
 
-    int getResultsSize();
-
     long getLimitOfResults();
 
-    Iterator<Resource> getChildNodes();
+    List<Map<String,String>> getChildNodes();
+
+    String getQueryParameter();
 }

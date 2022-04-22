@@ -14,9 +14,7 @@ import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.osgi.service.component.annotations.Reference;
 
 import javax.jcr.RepositoryException;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Model(
         adaptables = {SlingHttpServletRequest.class},
@@ -34,20 +32,15 @@ public class SearchModelImpl implements SearchModel {
     @SlingObject
     private ResourceResolver resourceResolver;
 
-//    public SlingHttpServletRequest getRequest() {
-//        return request;
-//    }
-
-//    Map<String,String> getQueryItem = searchService.searchResultSQL2(getRootPath(),getTitle(),getLimitOfResults(),resourceResolver);
+    public SlingHttpServletRequest getRequest() {
+        return request;
+    }
 
     @ValueMapValue
     private long limitOfResults;
 
     @ValueMapValue
     String title;
-
-    @ValueMapValue
-    private int resultSize;
 
     @Override
     public String getRootPath() {
@@ -60,24 +53,25 @@ public class SearchModelImpl implements SearchModel {
     }
 
     @Override
-    public int getResultsSize() {
-        return resultSize;
-    }
-
-    @Override
     public long getLimitOfResults() {
         return limitOfResults;
     }
 
-    public Iterator<Resource> getChildNodes() {
-        if(getRootPath() == null || getRootPath().isEmpty()) {
-            return Collections.emptyIterator();
+    @Override
+    public String getQueryParameter() {
+        return request.getQueryString();
+    }
+
+    public List<Map<String,String>> getChildNodes() {
+        ResourceResolver resourceResolver = request.getResourceResolver();
+        List<Map<String,String>> resultsFromSearch = searchService.searchResultSQL2(getRootPath(),getQueryParameter(),getLimitOfResults(),resourceResolver);
+        if(resultsFromSearch == null || resultsFromSearch.isEmpty()) {
+            Map<String,String> noResults = new HashMap<>();
+            noResults.put("title", "Not match for: " + getQueryParameter() + " . Try other query.");
+            assert resultsFromSearch != null;
+            resultsFromSearch.add(noResults);
         }
-        final Resource resource = resourceResolver.getResource(getRootPath());
-        if(resource == null) {
-            return Collections.emptyIterator();
-        }
-        return resource.listChildren();
+        return resultsFromSearch;
     }
 
 }

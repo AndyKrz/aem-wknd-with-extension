@@ -21,7 +21,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -52,29 +54,32 @@ public class SearchServiceImpl implements SearchService {
         return searchConfiguration.getRootPath();
     }
 
-    private QueryResult querySearch(String rootPath, String title, long limitOfResults, ResourceResolver resourceResolver) throws RepositoryException {
-        String sql2Query = "SELECT * FROM [nt:unstructured] AS node WHERE ISDESCENDANTNODE (node," + rootPath + ") ORDER BY node.[jcr.title]"
+    private QueryResult querySearch(String path, String title, long limitOfResults, ResourceResolver resourceResolver) throws RepositoryException {
+        String sql2Query = "SELECT * FROM [nt:unstructured] AS node WHERE ISDESCENDANTNODE (node," + path + ") ORDER BY node.[jcr.title]"
                 + "AND NAME() like %\"" + title + "%\"";
         final Session session = resourceResolver.adaptTo(Session.class);
+        assert session != null;
         final Query query = session.getWorkspace().getQueryManager().createQuery(sql2Query,Query.JCR_SQL2);
         query.setLimit(limitOfResults);
         return query.execute();
     }
 
 
-    public Map<String,String> searchResultSQL2(String rootPath, String title, long limitOfResults,ResourceResolver resourceResolver) throws RepositoryException {
-        Map<String,String> searchedResults = new HashMap<>();
+    public List<Map<String,String>> searchResultSQL2(String path, String title, long limitOfResults, ResourceResolver resourceResolver) {
+        List<Map<String,String>> searchedResults = new ArrayList<>();
         QueryResult result;
-
         try {
-            result = querySearch(rootPath,title,limitOfResults,resourceResolver);
+            result = querySearch(path,title,limitOfResults,resourceResolver);
             NodeIterator pages = result.getNodes();
             while(pages.hasNext()){
+                Map<String, String> pagesProperty = new HashMap<>();
                 Node page = pages.nextNode();
                 if(page.hasProperty("jcr:title")) {
-                    searchedResults.put("title",page.getProperty("jcr:title").getString());
-                    searchedResults.put("name",page.getName());
-                    searchedResults.put("created",page.getProperty("jcr:created").getString());
+                    pagesProperty.put("title",page.getProperty("jcr:title").getString());
+                    pagesProperty.put("name",page.getName());
+                    pagesProperty.put("path", page.getPath());
+                    pagesProperty.put("created",page.getProperty("jcr:created").getString());
+                    searchedResults.add(pagesProperty);
                 }
             }
         } catch (RepositoryException e) {
@@ -82,6 +87,5 @@ public class SearchServiceImpl implements SearchService {
         }
         return searchedResults;
     }
-
 
 }
