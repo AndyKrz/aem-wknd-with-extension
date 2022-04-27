@@ -36,15 +36,6 @@
                                                     min="{Long}0"
                                                     name="./limitOfResults"
                                             />
-<!--                                            <searchRoot-->
-<!--                                                jcr:primaryType="nt:unstructured"-->
-<!--                                                sling:resourceType="cq/gui/components/coral/common/form/pagefield"-->
-<!--                                                fieldDescription="The root page from which to search in. Can be a blueprint master, language master or regular page."-->
-<!--                                                fieldLabel="Search Root"-->
-<!--                                                name="./searchRoot"-->
-<!--                                                required="{Boolean}true"-->
-<!--                                                rootPath="/content"-->
-<!--                                                value="${not empty cqDesign.searchRoot ? cqDesign.searchRoot : ''}"/>-->
                                         </items>
                                     </column>
                                 </items>

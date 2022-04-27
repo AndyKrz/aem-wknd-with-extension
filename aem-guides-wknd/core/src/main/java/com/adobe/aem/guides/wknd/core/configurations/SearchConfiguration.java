@@ -12,7 +12,7 @@ public @interface SearchConfiguration {
             name = "Enable config",
             description = "This property indicates whether the configuration values will taken into account or not",
             type = AttributeType.BOOLEAN)
-    public boolean enableConfig();
+    public boolean enableConfig() default true;
 
     @AttributeDefinition(
             name = "Path",

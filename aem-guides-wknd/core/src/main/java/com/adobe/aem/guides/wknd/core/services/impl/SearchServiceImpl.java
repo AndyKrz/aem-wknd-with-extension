@@ -1,16 +1,14 @@
 package com.adobe.aem.guides.wknd.core.services.impl;
 
 import com.adobe.aem.guides.wknd.core.configurations.SearchConfiguration;
-import com.adobe.aem.guides.wknd.core.models.impl.SearchModelImpl;
+import com.adobe.aem.guides.wknd.core.models.SearchPageItems;
 import com.adobe.aem.guides.wknd.core.services.SearchService;
-import org.apache.sling.api.SlingHttpServletRequest;
+import com.google.common.collect.Lists;
+import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
-import org.apache.sling.api.resource.ResourceResolverFactory;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Modified;
-import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.metatype.annotations.Designate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +19,10 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-@Component(service = SearchService.class,immediate = true)
+@Component(service = SearchService.class, immediate = true)
 @Designate(ocd = SearchConfiguration.class)
 public class SearchServiceImpl implements SearchService {
 
@@ -35,55 +30,45 @@ public class SearchServiceImpl implements SearchService {
 
     private SearchConfiguration searchConfiguration;
 
-    @Self
-    private SlingHttpServletRequest request;
+    public String rootPath;
+
+    public String getRootPath() {
+        return rootPath;
+    }
 
     @Activate
     @Modified
-    protected void activate(SearchConfiguration searchConfiguration){
-        this.searchConfiguration = searchConfiguration;
+    protected void activate(SearchConfiguration searchConfiguration) {
+        rootPath = searchConfiguration.getRootPath();
     }
-
-    @Override
-    public boolean enableConfig() {
-        return searchConfiguration.enableConfig();
-    }
-
-    @Override
-    public String getRootPath(){
-        return searchConfiguration.getRootPath();
-    }
-
-    private QueryResult querySearch(String path, String title, long limitOfResults, ResourceResolver resourceResolver) throws RepositoryException {
-        String sql2Query = "SELECT * FROM [nt:unstructured] AS node WHERE ISDESCENDANTNODE (node," + path + ") ORDER BY node.[jcr.title]"
-                + "AND NAME() like %\"" + title + "%\"";
+    //    todo change method to more efficient
+    private QueryResult querySearch(String title, long limitOfResults, ResourceResolver resourceResolver) throws RepositoryException {
+//        final String SQL2_QUERY = String.format("SELECT * FROM [cq:Page] AS page WHERE ISDESCENDANTNODE (page,\"  %s  \")"
+//                + "AND NAME() like \" %s \" ORDER BY page.[jcr.title]",rootPath,title);
+        String sql2Query = "SELECT * FROM [cq:Page] AS page WHERE ISDESCENDANTNODE (page,\"" + rootPath + "\")"
+                + "AND NAME() like \"%" + title + "%\" ORDER BY page.[jcr.title]";
         final Session session = resourceResolver.adaptTo(Session.class);
-        assert session != null;
-        final Query query = session.getWorkspace().getQueryManager().createQuery(sql2Query,Query.JCR_SQL2);
+        final Query query = session.getWorkspace().getQueryManager().createQuery(sql2Query, Query.JCR_SQL2);
         query.setLimit(limitOfResults);
         return query.execute();
     }
 
-
-    public List<Map<String,String>> searchResultSQL2(String path, String title, long limitOfResults, ResourceResolver resourceResolver) {
-        List<Map<String,String>> searchedResults = new ArrayList<>();
-        QueryResult result;
+    public List<SearchPageItems> searchResultSQL2(String title, long limitOfResults, ResourceResolver resourceResolver) {
+        List<SearchPageItems> searchedResults = new ArrayList<>();
         try {
-            result = querySearch(path,title,limitOfResults,resourceResolver);
+            QueryResult result;
+            result = querySearch(title, limitOfResults, resourceResolver);
             NodeIterator pages = result.getNodes();
-            while(pages.hasNext()){
-                Map<String, String> pagesProperty = new HashMap<>();
+            while (pages.hasNext()) {
+                SearchPageItems items = new SearchPageItems();
                 Node page = pages.nextNode();
-                if(page.hasProperty("jcr:title")) {
-                    pagesProperty.put("title",page.getProperty("jcr:title").getString());
-                    pagesProperty.put("name",page.getName());
-                    pagesProperty.put("path", page.getPath());
-                    pagesProperty.put("created",page.getProperty("jcr:created").getString());
-                    searchedResults.add(pagesProperty);
-                }
+                items.setName(page.getName());
+                items.setPath(page.getPath());
+                items.setThumbnail(page.getPath()+"/jcr:content/image/file.thumb.jpg");
+                searchedResults.add(items);
             }
         } catch (RepositoryException e) {
-            LOG.error("Exception {}",e.toString());
+            LOG.error("Exception {}", e.toString());
         }
         return searchedResults;
     }

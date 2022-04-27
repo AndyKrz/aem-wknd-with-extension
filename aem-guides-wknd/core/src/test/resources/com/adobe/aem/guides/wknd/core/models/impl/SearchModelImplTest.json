@@ -1,9 +1,12 @@
 {
-  "searchModel": {
-
-
-
+  "searchModelIsEmpty": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/searchtext",
+    "limitOfResults": 0
+  },
+  "searchModelIsNotEmpty": {
+    "jcr:primaryType": "nt:unstructured",
+    "sling:resourceType": "wknd/components/searchtext",
+    "limitOfResults": 8
   }
-
-
 }

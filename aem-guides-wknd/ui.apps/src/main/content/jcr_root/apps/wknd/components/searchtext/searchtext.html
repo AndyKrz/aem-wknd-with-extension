@@ -16,36 +16,24 @@
 <section
         data-sly-use.model="com.adobe.aem.guides.wknd.core.models.SearchModel"
         data-sly-use.search="com.adobe.cq.wcm.core.components.models.Search"
-        id="${search.id}"
-        class="cmp-search"
-        role="search"
-        data-cmp-is="search"
         data-cmp-results-size="${search.resultsSize}">
-  <div>
-    <h3>Showing results for: ${model.queryParameter}</h3>
-    <dl data-sly-list="${model.childNodes}">
-      <dt> <a href=${item.rootPath} >${item.title}</a> </dt>
-    </dl>
-    <p>RootPath : ${model.getRootPath}</p>
-    <p>Limit: ${model.limitOfResults}</p>
-    <dl data-sly-repeat="${model.childNodes}">
-      <dd>Title of content: ${item.jcr:title}</dd>
-      <dd>RootPathConfig: ${model.getRootPath}</dd>
-      <dd>Path of node: ${item.getPath}</dd>
-    </dl>
-  </div>>
-  <div>
 
-  </div>
-  <div class="cmp_search__info" aria-live="polite" role="status"></div>
-  <form class="cmp-search__form" data-cmp-hook-search="form"
-        method="get" action="${currentPage.path @ addSelectors=['searchresults'], extension='json', suffix = search.relativePath}"
-        autocomplete="off">
-    <div class="cmp-search__field">
-      <i class="cmp-search__icon" data-cmp-hook-search="icon"></i>
-      <span class="cmp-search__loading-indicator" data-cmp-hook-search="loadingIndicator"></span>
-      <input class="cmp-search__input" data-cmp-hook-search="input" type="text" name="fulltext" placeholder="${'Search' @ i18n}"
-             role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-invalid="false" aria-expanded="false">
+  <div>
+    <div>
+      <dl data-sly-test="${!model.isEmptyQuery}">
+        <h1>Showing results for: ${model.queryParameter}</h1>
+      <dl data-sly-list="${model.results}">
+        <dt> <a href=${item.path}.html >${item.name} <img src="${item.thumbnail}"> </a> </dt>
+      </dl>
+        <dl data-sly-test="${model.isResultEmpty}">
+          <h2>The is no results for ${model.queryParameter}.</h2>
+        </dl>
+      </dl>
+      <dl data-sly-test="${model.isEmptyQuery}">
+        <h2>The is no results - empty parameter. </h2>
+        </dl>
+      <p>Limit: ${model.limitOfResults}</p>
+      <p>Root path: ${model.rootPath}</p>
     </div>
-  </form>
+  </div>
 </section>

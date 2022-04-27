@@ -1,27 +1,32 @@
 package com.adobe.aem.guides.wknd.core.models.impl;
 
 import com.adobe.aem.guides.wknd.core.models.SearchModel;
+import com.adobe.aem.guides.wknd.core.models.SearchPageItems;
 import com.adobe.aem.guides.wknd.core.services.SearchService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.request.RequestParameter;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.DefaultInjectionStrategy;
 import org.apache.sling.models.annotations.Model;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
 import org.apache.sling.models.annotations.injectorspecific.Self;
-import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
-import org.osgi.service.component.annotations.Reference;
 
-import javax.jcr.RepositoryException;
+import javax.annotation.PostConstruct;
 import java.util.*;
 
 @Model(
         adaptables = {SlingHttpServletRequest.class},
         adapters = {SearchModel.class},
+        resourceType = {SearchModelImpl.RESOURCE_TYPE},
         defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL
 )
 public class SearchModelImpl implements SearchModel {
+
+    public static final String QUERY_PARAM = "q";
+
+    protected static final String RESOURCE_TYPE = "apps/wknd/components/searchtext";
 
     @OSGiService
     SearchService searchService;
@@ -29,27 +34,26 @@ public class SearchModelImpl implements SearchModel {
     @Self
     private SlingHttpServletRequest request;
 
-    @SlingObject
-    private ResourceResolver resourceResolver;
+    @ValueMapValue
+    private long limitOfResults;
+
+    @ValueMapValue
+    private String queryParameter;
+
+    @PostConstruct
+    public void init(){
+        queryParameter = getQueryParameter();
+        limitOfResults = getLimitOfResults();
+    }
 
     public SlingHttpServletRequest getRequest() {
         return request;
     }
 
-    @ValueMapValue
-    private long limitOfResults;
-
-    @ValueMapValue
-    String title;
-
+    //rootPath visibility
     @Override
     public String getRootPath() {
         return searchService.getRootPath();
-    }
-
-    @Override
-    public String getTitle() {
-        return title;
     }
 
     @Override
@@ -59,19 +63,32 @@ public class SearchModelImpl implements SearchModel {
 
     @Override
     public String getQueryParameter() {
-        return request.getQueryString();
+        return Optional
+                .ofNullable(request)
+                .map(request ->request.getRequestParameter(QUERY_PARAM))
+                .map(RequestParameter::getString)
+                .orElse("");
     }
 
-    public List<Map<String,String>> getChildNodes() {
-        ResourceResolver resourceResolver = request.getResourceResolver();
-        List<Map<String,String>> resultsFromSearch = searchService.searchResultSQL2(getRootPath(),getQueryParameter(),getLimitOfResults(),resourceResolver);
+    @Override
+    public List<SearchPageItems> getResults() {
+        ResourceResolver resourceResolver = getRequest().getResourceResolver();
+        List<SearchPageItems> resultsFromSearch = searchService.searchResultSQL2(queryParameter,limitOfResults,resourceResolver);
         if(resultsFromSearch == null || resultsFromSearch.isEmpty()) {
-            Map<String,String> noResults = new HashMap<>();
-            noResults.put("title", "Not match for: " + getQueryParameter() + " . Try other query.");
-            assert resultsFromSearch != null;
-            resultsFromSearch.add(noResults);
+            return Collections.emptyList();
         }
         return resultsFromSearch;
+    }
+
+    @Override
+    public boolean isEmptyQuery(){
+        return StringUtils.isBlank(queryParameter);
+    }
+
+    @Override
+    public boolean isResultEmpty(){
+        List<SearchPageItems> emptyResult = getResults();
+        return emptyResult.isEmpty();
     }
 
 }
