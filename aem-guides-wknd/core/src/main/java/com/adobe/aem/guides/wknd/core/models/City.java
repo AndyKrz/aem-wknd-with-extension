@@ -5,15 +5,17 @@ public class City {
     private String name;
     private int population;
     private String countryCode;
+    private boolean capital;
 
     public City() {
     }
 
-    public City(int id, String name, String countryCode, int population) {
+    public City(int id, String name, String countryCode, int population, boolean capital) {
         this.id = id;
         this.name = name;
         this.population = population;
         this.countryCode = countryCode;
+        this.capital = capital;
     }
 
     public int getId() {
@@ -48,7 +50,19 @@ public class City {
         this.countryCode = countryCode;
     }
 
+    public boolean isCapital() {
+        return capital;
+    }
+
+    public void setCapital(boolean capital) {
+        this.capital = capital;
+    }
+
     public String toString() {
-        return "City [id=" + this.id + ", name=" + this.name + ", population=" + this.population + ", countryCode=" + this.countryCode + "]";
+        return "City [id=" + this.id + ", name=" + this.name + ", population=" + this.population +
+                ", countryCode=" + this.countryCode + ", capital=" + this.capital + "]";
+    }
+
+    public boolean getCapital() { return this.capital;
     }
 }

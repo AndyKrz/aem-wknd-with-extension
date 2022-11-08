@@ -570,6 +570,14 @@ Bundle-DocURL:
     <!-- ====================================================================== -->
     <dependencyManagement>
         <dependencies>
+<!--           cif components -->
+            <dependency>
+                <groupId>com.adobe.commerce.cif</groupId>
+                <artifactId>core-cif-components-all</artifactId>
+                <type>zip</type>
+                <version>x.y.z</version>
+            </dependency>
+
             <!-- OSGi Dependencies -->
             <dependency>
                 <groupId>org.osgi</groupId>

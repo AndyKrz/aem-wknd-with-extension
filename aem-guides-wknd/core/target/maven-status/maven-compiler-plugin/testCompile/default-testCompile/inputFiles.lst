@@ -2,6 +2,7 @@ D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd
 D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\HelloWorldModelTest.java
 D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\impl\BylineImplTest.java
 D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\listeners\SimpleResourceListenerTest.java
+D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\models\impl\SearchModelImplTest.java
 D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\schedulers\SimpleScheduledTaskTest.java
 D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\testcontext\AppAemContext.java
 D:\andrzej.krzemien\aem-guides-wknd\core\src\test\java\com\adobe\aem\guides\wknd\core\filters\LoggingFilterTest.java

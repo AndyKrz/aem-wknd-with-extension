@@ -17,6 +17,7 @@ package com.adobe.aem.guides.wknd.core.schedulers;
 
 import java.util.List;
 
+import org.apache.lucene.analysis.core.SimpleAnalyzer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,6 +36,8 @@ import static org.mockito.Mockito.when;
 class SimpleScheduledTaskTest {
 
     private SimpleScheduledTask fixture = new SimpleScheduledTask();
+
+    private SimpleAnalyzer analyzer = new SimpleAnalyzer();
 
     private TestLogger logger = TestLoggerFactory.getTestLogger(fixture.getClass());
 

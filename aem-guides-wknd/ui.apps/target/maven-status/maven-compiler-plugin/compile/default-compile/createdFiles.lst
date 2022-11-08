@@ -1,5 +1,6 @@
 org\apache\sling\scripting\sightly\apps\wknd\components\somebutton\somebutton__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\navigation\navigation__002e__html.class
+org\apache\sling\scripting\sightly\apps\wknd\components\searchtext\searchtext__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\xfpage\customheaderlibs__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\byline\byline__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\helloworld\helloworld__002e__html.class
@@ -7,4 +8,5 @@ org\apache\sling\scripting\sightly\apps\wknd\components\xfpage\content__002e__ht
 org\apache\sling\scripting\sightly\apps\wknd\components\page\customfooterlibs__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\page\customheaderlibs__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\trainingtitle\trainingtitle__002e__html.class
+org\apache\sling\scripting\sightly\apps\wknd\components\searchtext\itemTemplate__002e__html.class
 org\apache\sling\scripting\sightly\apps\wknd\components\xfpage\customfooterlibs__002e__html.class

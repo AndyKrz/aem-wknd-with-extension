@@ -52,7 +52,7 @@
                     <group>com.adobe.aem.guides</group>
                     <packageType>container</packageType>
                     <!-- skip sub package validation for now as some vendor packages like CIF apps will not pass -->
-                    <skipSubPackageValidation>true</skipSubPackageValidation>
+<!--                    <skipSubPackageValidation>true</skipSubPackageValidation>-->
                     <embeddeds>
                         <embedded>
                             <groupId>com.adobe.aem.guides</groupId>
@@ -95,6 +95,13 @@
                             <target>/apps/wknd-vendor-packages/application/install</target>
                         </embedded>
                     </embeddeds>
+                    <subPackages>
+                        <subPackage>
+                            <groupId>com.adobe.commerce.cif</groupId>
+                            <artifactId>core-cif-components-all</artifactId>
+                            <filter>true</filter>
+                        </subPackage>
+                    </subPackages>
                 </configuration>
             </plugin>
             <plugin>

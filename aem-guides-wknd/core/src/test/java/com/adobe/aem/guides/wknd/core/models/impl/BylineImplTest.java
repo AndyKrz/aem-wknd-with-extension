@@ -56,7 +56,7 @@ public class BylineImplTest {
 
         String actual = byline.getName();
         //then
-        assertEquals(expected, actual);
+        assertEquals(expected,actual);
     }
 
     @Test

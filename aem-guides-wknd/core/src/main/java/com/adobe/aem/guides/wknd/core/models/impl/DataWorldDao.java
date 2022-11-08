@@ -16,13 +16,13 @@ public class DataWorldDao implements WorldDao {
     private final Set<String> continents;
 
     public void createCities() {
-        this.cities.put(1, new City(1, "Praga", "CZE", 1780000));
-        this.cities.put(2, new City(2, "Berlin", "GER", 5237500));
-        this.cities.put(3, new City(3, "Krakow", "POL", 2500000));
-        this.cities.put(4, new City(4, "Rome", "ITA", 6780000));
-        this.cities.put(5, new City(5, "Pekin", "CHI", 21540000));
-        this.cities.put(6, new City(6, "Rio de Janeiro", "BRA", 6740000));
-        this.cities.put(7, new City(7, "Wroclaw", "POL", 674000));
+        this.cities.put(1, new City(1, "Praga", "CZE", 1780000,true));
+        this.cities.put(2, new City(2, "Berlin", "GER", 5237500,true));
+        this.cities.put(3, new City(3, "Krakow", "POL", 2500000,false));
+        this.cities.put(4, new City(4, "Rome", "ITA", 6780000,true));
+        this.cities.put(5, new City(5, "Pekin", "CHI", 21540000,true));
+        this.cities.put(6, new City(6, "Rio de Janeiro", "BRA", 6740000,false));
+        this.cities.put(7, new City(7, "Wroclaw", "POL", 674000,false));
     }
 
     public void createCountries() {
@@ -41,7 +41,7 @@ public class DataWorldDao implements WorldDao {
 
         while(var1.hasNext()) {
             City city = (City)var1.next();
-            Country country = (Country)this.countries.get(city.getCountryCode());
+            Country country = this.countries.get(city.getCountryCode());
             if (country == null) {
                 System.out.println("No such countryCode: " + city.getCountryCode());
             } else {
@@ -50,6 +50,7 @@ public class DataWorldDao implements WorldDao {
         }
 
         this.continents = new HashSet();
+
         var1 = this.countries.values().iterator();
 
         while(var1.hasNext()) {
@@ -60,7 +61,7 @@ public class DataWorldDao implements WorldDao {
     }
 
     public Country findCountryByCode(String code) {
-        return (Country)this.countries.get(code);
+        return this.countries.get(code);
     }
 
     public Set<String> getAllContinents() {
@@ -69,10 +70,8 @@ public class DataWorldDao implements WorldDao {
 
     public List<Country> findCountriesByContinent(String continent) {
         List<Country> result = new ArrayList();
-        Iterator var3 = this.countries.values().iterator();
 
-        while(var3.hasNext()) {
-            Country country = (Country)var3.next();
+        for (Country country : this.countries.values()) {
             if (continent.equals(country.getContinent())) {
                 result.add(country);
             }
